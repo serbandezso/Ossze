@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Átkelés a Szakadék Fölött - Belső Utazás</title>
-  <meta name="google-site-verification" content="nlzfdyxXJSmTz937ZyZqmv56UuhQP_R1bSUnecRfLBE" />
     <style>
         * {
             margin: 0;
@@ -35,6 +34,471 @@
 
         @keyframes fadeIn {
             to { opacity: 1; }
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .bridge-container {
+            position: relative;
+            height: 200px;
+            margin: 4rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bridge {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                #ffd700 20%, 
+                #ffed4e 50%, 
+                #ffd700 80%, 
+                transparent 100%);
+            position: relative;
+            transform: scaleX(0);
+            opacity: 0;
+            transition: all 1.5s ease-out;
+            z-index: 2;
+        }
+
+        .bridge::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 0;
+            right: 0;
+            height: 18px;
+            background: radial-gradient(circle at center, 
+                rgba(255, 215, 0, 0.3) 0%, 
+                transparent 70%);
+        }
+
+        /* Nap stílusok */
+        .sun {
+            position: absolute;
+            top: 30px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ffed4e 0%, #ffd700 70%);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            z-index: 1;
+            opacity: 0;
+            animation: sunRise 2s ease-out 1.5s forwards, sunGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes sunRise {
+            to { 
+                opacity: 1;
+                top: 20px;
+            }
+        }
+
+        @keyframes sunGlow {
+            from { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+            to { box-shadow: 0 0 50px rgba(255, 215, 0, 0.9), 0 0 80px rgba(255, 215, 0, 0.4); }
+        }
+
+        /* Víz stílusok */
+        .water {
+            position: absolute;
+            bottom: 30px;
+            width: 90%;
+            height: 40px;
+            background: linear-gradient(to bottom, #1a5fb4, #1c71d8);
+            border-radius: 50% 50% 0 0;
+            z-index: 1;
+            opacity: 0;
+            animation: waterRise 2s ease-out 1.5s forwards;
+            overflow: hidden;
+        }
+
+        @keyframes waterRise {
+            to { 
+                opacity: 0.8;
+                bottom: 20px;
+            }
+        }
+
+        .water::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.3));
+            border-radius: 50%;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,40 Q300,20 600,40 T1200,40 L1200,0 L0,0 Z" fill="rgba(255,255,255,0.2)"/></svg>');
+            animation: waveMove 10s linear infinite;
+        }
+
+        .wave:nth-child(2) {
+            animation-delay: -5s;
+            opacity: 0.5;
+            height: 15px;
+        }
+
+        @keyframes waveMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .philosophy-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            opacity: 0;
+        }
+
+        .philosophy-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .portals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .portal {
+            background: rgba(255, 255, 0, 0.08);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 215, 0, 0.1), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .portal:hover::before {
+            left: 100%;
+        }
+
+        .portal:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.4);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .portal-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .portal-description {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .portal-tag {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #ffd700;
+        }
+
+        .mind-vs-silence {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 4rem 0;
+            opacity: 0;
+        }
+
+        .column {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .column-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #ffd700;
+        }
+
+        .column-motto {
+            font-style: italic;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            opacity: 0.7;
+            font-size: 0.95rem;
+            padding: 0 1rem;
+        }
+
+        .column.mind {
+            border-left: 3px solid #ff6b6b;
+        }
+
+        .column.silence {
+            border-left: 3px solid #4ecdc4;
+        }
+
+        .column ul {
+            list-style: none;
+        }
+
+        .column li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .column li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: inherit;
+        }
+
+        .mind li::before {
+            color: #ff6b6b;
+        }
+
+        .silence li::before {
+            color: #4ecdc4;
+        }
+
+        .quote {
+            text-align: center;
+            font-style: italic;
+            margin: 3rem 0;
+            padding: 2rem;
+            border-left: 3px solid #ffd700;
+            background: rgba(255, 215, 0, 0.05);
+            opacity: 0;
+        }
+
+        .final-invitation {
+            text-align: center;
+            margin-top: 4rem;
+            opacity: 0;
+        }
+
+        .final-invitation p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .invitation-link {
+            color: #ffd700;
+            text-decoration: none;
+            border-bottom: 1px solid #ffd700;
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .invitation-link:hover {
+            opacity: 0.8;
+            border-bottom-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .mind-vs-silence {
+                grid-template-columns: 1fr;
+            }
+            
+            .portals {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .sun {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Átkelés a Szakadék Fölött</h1>
+            <p class="subtitle">A félelemből a bizalom útján. A hiányból az egésszé.</p>
+        </header>
+
+        <div class="bridge-container">
+            <div class="sun"></div>
+            <div class="bridge"></div>
+            <div class="water">
+                <div class="wave"></div>
+                <div class="wave"></div>
+            </div>
+        </div>
+
+        <div class="philosophy-text">
+            <p>„A jövőt szakadéknak láttam magam előtt. A kudarc lehetősége olyan szégyent hordozott, amit az önbecsülésem már nem bírt el. Inkább választotta volna a biztos halált, mint hogy szembenézzen a zuhanás félelmével. Nem a semmi vonzott — csak menekültem attól, amit elviselhetetlennek hittem. Aztán, amikor az elmém összeomlott, és már nem volt mit védenie, a csendben előlépett valami, amit addig nem hallottam: a szeretet, amely nem vádol, nem szégyenít, csak megtart.”</p>
+            <p>Az Isteni gondviselés nem mentett ki a krízisből, de velem hordozta annak terhét. Most azt szeretném átadni, amit megtanultam: hogy a szenvedés átalakítható, a hiányból pedig egésszé válhatunk.</p>
+        </div>
+
+        <div class="mind-vs-silence">
+            <div class="column mind">
+                <h3 class="column-title">Az Elme Védelme</h3>
+                <p class="column-motto">"Én irányítok. Én döntök. Én védekezem."</p>
+                <ul>
+                    <li>Vádaskodás és harag</li>
+                    <li>Félelem-alapú reakciók</li>
+                    <li>Kontroll illúziója</li>
+                    <li>Érzelmi turbulencia</li>
+                    <li>"Maradj, ahol vagy"</li>
+                </ul>
+            </div>
+            <div class="column silence">
+                <h3 class="column-title">A Tudatalatti Csend</h3>
+                <p class="column-motto">"Legyen meg a Te akaratod. Bízom a gondoskodásban."</p>
+                <ul>
+                    <li>Szeretet gondoskodó formája</li>
+                    <li>Bizalom-alapú cselekvés</li>
+                    <li>Hála</li>
+                    <li>Elfogadás önmagunk és mások felé</li>
+                    <li>Belső tér megnyílása</li>
+                    <li>Mély nyugalom</li>
+                    <li>"Lépj ki a szakadék fölé"</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="quote">
+            "Nem a csodát vártam - csak a következő lépés erejét. És mindig jött, láthatatlanul, csendesen."
+        </div>
+
+        <div id="portals" class="portals">
+            <a href="https://serbandezso.github.io/Elso/" class="portal">
+                <h2 class="portal-title">Személyes Utazás</h2>
+                <p class="portal-description">A kreativitás és önazonosság útja - ahogyan a hiány és a félelem anyaggá válik az átalakulás szolgálatában</p>
+                <span class="portal-tag">Belső Átalakulás</span>
+            </a>
+            
+            <a href="https://serbandezso.github.io/ks/" class="portal">
+                <h2 class="portal-title">Kvantum-Szövetség</h2>
+                <p class="portal-description">A gyakorlati alkalmazás - ahogyan a kapott szeretet visszaárad mások életébe értékké formálva</p>
+                <span class="portal-tag">Külső Szolgálat</span>
+            </a>
+        </div>
+
+        <div class="quote">
+            <h2>Mit találsz itt?</h2>
+            <p>
+                Nem megmentést adok át. Nem válaszokat és nem módszert. Amit itt találsz, az egy út története – esendő, néha fájdalmas, néha félelmetes. Egy olyan úté, ahol a csoda sosem volt látványos, sosem volt hangos, és sosem volt önmagát ünneplő. A csoda inkább rejtőzött, és csak utólag vált láthatóvá.
+            </p>
+            <p>
+                A megtartó jelenlét nem az elmén keresztül érkezett. Az elme akar, vádol, követel, mérlegel. A csend – az a mély, halk csend – nem érzelmekből beszél, hanem gondoskodásból. Ahol az ember már nem a saját erejét mutatja, hanem egyszerűen így szól: <strong>„Legyen meg a Te akaratod.”</strong>
+            </p>
+            <p>
+                A krízisben elcsendesedik az akarat. És ebben a csendben valami új születhet: nem a régi elme továbbküzdése, hanem az új ember lélegzete. A két oldal – a „Személyes út” és a „Kvantum‑Szövetség” – ezt a tapasztalatot kétféleképpen meséli el. Ez az oldal csak összeköti őket, hogy aki keres, megtalálja azt, amihez most leginkább ereje, nyitottsága vagy bátorsága van.
+            </p>
+            <p>
+                Ha szükséged van valamire ebből, vidd el. Ha nem, tedd le. A szeretet nem számít, nem kér cserébe, nem tart számon: csak adja magát.
+            </p>
+        </div>
+
+        <div class="final-invitation">
+            <p>A híd előtted van. Nem kell mást tenned, csak felismerned, hogy létezik.</p>
+            <a href="#portals" class="invitation-link">Kezdd ahol most vagy</a>
+        </div>
+    </div>
+
+    <script>
+        // Egyszerű scroll animáció
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 1.5s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Animálandó elemek
+        document.querySelectorAll('.philosophy-text, .mind-vs-silence, .quote, .final-invitation').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+
+        // Híd animáció
+        const bridge = document.querySelector('.bridge');
+        setTimeout(() => {
+            bridge.style.transform = 'scaleX(1)';
+            bridge.style.opacity = '1';
+        }, 1000);
+
+        // Lágy görgetés a portálokhoz
+        document.querySelector('.invitation-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#portals').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>            to { opacity: 1; }
         }
 
         .title {
