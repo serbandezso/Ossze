@@ -1,0 +1,190 @@
+<!doctype html>
+
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Elfogadásra Hangolódás</title>
+  <meta name="description" content="Nem lemondás, hanem átadás — gyakorlati útmutató a vágyak Istenre bízásához." />
+  <style>
+    :root{--bg:#fbfaf8;--card:#ffffff;--muted:#6b6b6b;--accent:#0b6b4f}
+    *{box-sizing:border-box}
+    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;line-height:1.5;margin:0;background:var(--bg);color:#111}
+    header{background:linear-gradient(180deg, #eaf6f0 0%, var(--bg) 100%);padding:40px 16px 28px;border-bottom:1px solid rgba(0,0,0,0.04)}
+    .container{max-width:900px;margin:0 auto;padding:0 16px}
+    h1{font-size:28px;margin:0 0 6px}
+    .tagline{color:var(--muted);margin-bottom:18px}
+    .card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 20px rgba(10,10,10,0.04);margin-bottom:18px}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px}
+    @media (max-width:880px){.grid{grid-template-columns:1fr}h1{font-size:22px}}
+    h2{margin:0 0 10px;font-size:18px}
+    p{margin:0 0 12px}
+    ol{margin:0 0 12px 20px}
+    .muted{color:var(--muted);font-size:14px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600}
+    .example{background:#fcfdfc;border-left:4px solid rgba(11,107,79,0.12);padding:12px;border-radius:8px}
+    label{display:block;font-weight:600;margin:8px 0 6px}
+    textarea,input{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e6e6;font-size:15px}
+    footer{padding:20px 16px;text-align:center;color:var(--muted);font-size:14px}
+    .small{font-size:13px;color:var(--muted)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef7f2;color:var(--accent);font-weight:600;margin-right:8px}
+    .warn{background:#fff6f0;border-left:4px solid #ffb4a2;padding:12px;border-radius:8px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
+    .download{font-size:14px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Elfogadásra Hangolódás</h1>
+      <div class="tagline">Nem lemondás — átadás. A vágyakat Istenre bízni úgy, hogy közben cselekszünk, de nem erőlködünk.</div>
+    </div>
+  </header>  <main class="container" role="main">
+    <section class="card" aria-labelledby="about-title">
+      <h2 id="about-title">Miről szól ez?</h2>
+      <p>Az elme és a fantázia gyakran kreál élénk, csábító képeket. Ha azonosulunk ezekkel a képekkel, a vágyaink torzulhatnak és karikatúraszerű formát öltenek. A gyógyulás útja nem a teljes lemondás, hanem a tudatos átadás:</p>
+      <p class="muted">Megteszem, amit tudok — tervezek, dolgozom, imádkozom — de nem görcsölök. A megvalósulást a Forrásra (Istenre) bízom: legyen meg a Te akaratod.</p>
+    </section><div class="grid">
+  <div>
+    <section class="card" aria-labelledby="practice-title">
+      <h2 id="practice-title">4 lépéses gyakorlati imaút</h2>
+      <ol>
+        <li><strong>Felismerés:</strong> Nézd meg a vágyat — mit kérsz, honnan jön, hogyan érzik magukat testben és elmében?</li>
+        <li><strong>Átadás:</strong> Hozd oda Isten elé a vágyat: ne ragaszkodj, add át a Forrásnak a megvalósulást.</li>
+        <li><strong>Bizalom:</strong> Hagyd, hogy Isten bölcsessége alakítsa a kivezető utat — cselekedj, de ne erőlködj.</li>
+        <li><strong>Hála:</strong> Köszönd meg, akár részben, akár teljesen, mert a hála formálja a szívet és megtisztítja a szándékot.</li>
+      </ol>
+
+      <div class="example">
+        <strong>Példa:</strong>
+        <p class="small">Vágy: stabil munkahely és béke a családban. Felismerés: miért fontos? (biztonság, méltóság). Átadás: „Uram, ezt szeretném — a Te kezedbe teszem.” Bizalom: lépek munkakeresésben, de nem leszek kétségbeesett. Hála: köszönöm a kis lépéseket is.”</p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="practice-2">
+      <h2 id="practice-2">Gyakorlati eszközök</h2>
+      <p>Használj rövid naplóbejegyzéseket: írj 1-3 mondatot minden felismerésről és az átadásról. Az ismétlés segít a belső minták átalakulásában.</p>
+
+      <label for="journal">Gyors napló (3-4 sor):</label>
+      <textarea id="journal" rows="4" placeholder="Ma mit adok át Istennek?"></textarea>
+      <div style="margin-top:10px" class="actions">
+        <button class="btn" onclick="saveEntry()">Mentés a böngészőben</button>
+        <a class="btn" id="clear" href="#" onclick="clearJournal();return false;">Törlés</a>
+      </div>
+      <p id="saved" class="small" style="margin-top:8px;display:none;color:var(--muted)"></p>
+    </section>
+
+    <section class="card" aria-labelledby="caution-title">
+      <h2 id="caution-title">Figyelmeztetés és iránymutatás</h2>
+      <div class="warn">
+        <p class="small">Az elme képei néha tévesek vagy túlzóak lehetnek. Ha gyakran küzdesz erős, zavaró képekkel, vagy a vágyak szorongást, depressziót vagy kényszert okoznak, kérj szakmai segítséget is — a hit és a pszichológiai támogatás kiegészítik egymást.</p>
+      </div>
+    </section>
+  </div>
+
+  <aside>
+    <div class="card">
+      <div class="pill">Lépésről-lépésre</div>
+      <h2 style="margin-top:8px">Imalap — rövid</h2>
+      <p class="small">"Uram, látom ezt a vágyat. Nem mondok le róla, de átadom neked. Cselekedjek, és bízom, hogy Te vezeted az utat. Köszönöm. Ámen."</p>
+
+      <div style="margin-top:12px;" class="actions">
+        <a class="btn download" id="downloadTxt">Letöltés (imalap)</a>
+        <a class="btn" href="#practice-title">Gyakorlatok</a>
+      </div>
+
+      <hr style="margin:14px 0;border:none;border-top:1px solid #f0f0f0">
+
+      <h2 style="font-size:16px;margin-bottom:6px">Tanúságtétel</h2>
+      <p class="small">Ha szeretnéd, megoszthatod rövid tapasztalatodat. A megosztás segít másoknak látni, hogyan működik az átadás a gyakorlatban.</p>
+      <label for="testimony">Rövid tapasztalat (opcionális):</label>
+      <textarea id="testimony" rows="4" placeholder="Egy-két sor a tapasztalatodról..."></textarea>
+      <div style="margin-top:8px" class="actions">
+        <button class="btn" onclick="saveTestimony()">Mentés</button>
+      </div>
+      <p id="testimonySaved" class="small" style="display:none;color:var(--muted);margin-top:8px"></p>
+    </div>
+
+    <div class="card small" style="margin-top:12px">
+      <strong>Teológiai beágyazás</strong>
+      <p class="small">Ez a gyakorlat a keresztény hagyomány bizalmára épít: nem elutasítás, hanem ráhagyatkozás a Forrás bölcsességére. A cél: a vágy megtisztulása és a szív formálódása.</p>
+    </div>
+  </aside>
+</div>
+
+<section class="card">
+  <h2>Gyakori kérdések</h2>
+  <p><strong>Nem lesz-e ez passzivitás?</strong> Nem — az átadás mellett cselekszünk is. A különbség a ragaszkodás és a görcsösség hiánya.</p>
+  <p><strong>Mi van, ha Isten nem teljesíti a vágyamat?</strong> A hit nem garancia a megszerzésre, hanem arra, hogy a bensőnk békéje és irányultsága Isten kezében nyugszik — ez szabadságot ad cselekedni félelem nélkül.</p>
+</section>
+
+  </main>  <footer>
+    <div class="container small">© Elfogadásra Hangolódás — Készítette: te. Módosításért jelezd és segítek finomítani.</div>
+  </footer>  <script>
+    // Simple local save for journal and testimony
+    function saveEntry(){
+      const t = document.getElementById('journal').value.trim();
+      if(!t){alert('Írj valamit a naplóhoz.');return}
+      const entries = JSON.parse(localStorage.getItem('eh-journal')||'[]');
+      entries.unshift({text:t,ts:new Date().toISOString()});
+      localStorage.setItem('eh-journal', JSON.stringify(entries));
+      document.getElementById('saved').textContent = 'Mentve a böngésző helyi tárába.';
+      document.getElementById('saved').style.display='block';
+      setTimeout(()=>{document.getElementById('saved').style.display='none'},2400);
+      document.getElementById('journal').value='';
+    }
+    function saveTestimony(){
+      const t = document.getElementById('testimony').value.trim();
+      if(!t){alert('Ha megosztod, írj valamit.');return}
+      const list = JSON.parse(localStorage.getItem('eh-testimony')||'[]');
+      list.unshift({text:t,ts:new Date().toISOString()});
+      localStorage.setItem('eh-testimony', JSON.stringify(list));
+      document.getElementById('testimonySaved').textContent='Köszönjük — mentve a helyi tárba.';
+      document.getElementById('testimonySaved').style.display='block';
+      setTimeout(()=>{document.getElementById('testimonySaved').style.display='none'},2400);
+      document.getElementById('testimony').value='';
+    }
+    function clearJournal(){ if(confirm('Biztos törlöd a helyi naplót?')){localStorage.removeItem('eh-journal');alert('Törölve.')} }
+
+    // Download imalap as a .txt file
+    document.getElementById('downloadTxt').addEventListener('click', function(e){
+      const text = 'Uram, látom ezt a vágyat. Nem mondok le róla, de átadom neked. Cselekedjek, és bízom, hogy Te vezeted az utat. Köszönöm. Ámen.';
+      const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download='imalap.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+  </script>  <section id="saved-entries" style="max-width: 800px; margin: 40px auto; padding: 20px; background: #fdfdfd; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2>Korábbi naplójegyzeteid</h2>
+    <div id="entries-list" style="margin-top: 20px; line-height: 1.6; color: #444;"></div>
+  </section>  <script>
+    function loadEntries() {
+      const listDiv = document.getElementById('entries-list');
+      listDiv.innerHTML = "";
+
+      const entries = JSON.parse(localStorage.getItem('eh-journal') || "[]");
+
+      if (entries.length === 0) {
+        listDiv.innerHTML = '<p style="color:#888">Még nincs elmentett bejegyzés.</p>';
+        return;
+      }
+
+      entries.forEach((item, index) => {
+        const entryEl = document.createElement('div');
+        entryEl.style.marginBottom = '20px';
+        entryEl.style.padding = '15px';
+        entryEl.style.border = '1px solid #ddd';
+        entryEl.style.borderRadius = '8px';
+        entryEl.style.background = '#fff';
+
+        entryEl.innerHTML = `
+          <strong>${item.date}</strong>
+          <p style="white-space: pre-wrap;">${item.text}</p>
+        `;
+
+        listDiv.appendChild(entryEl);
+      });
+    }
+
+    loadEntries();
+  </script></body>
+</html>
