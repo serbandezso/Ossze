@@ -1,190 +1,783 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Elfogadásra Hangolódás</title>
-  <meta name="description" content="Nem lemondás, hanem átadás — gyakorlati útmutató a vágyak Istenre bízásához." />
-  <style>
-    :root{--bg:#fbfaf8;--card:#ffffff;--muted:#6b6b6b;--accent:#0b6b4f}
-    *{box-sizing:border-box}
-    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;line-height:1.5;margin:0;background:var(--bg);color:#111}
-    header{background:linear-gradient(180deg, #eaf6f0 0%, var(--bg) 100%);padding:40px 16px 28px;border-bottom:1px solid rgba(0,0,0,0.04)}
-    .container{max-width:900px;margin:0 auto;padding:0 16px}
-    h1{font-size:28px;margin:0 0 6px}
-    .tagline{color:var(--muted);margin-bottom:18px}
-    .card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 20px rgba(10,10,10,0.04);margin-bottom:18px}
-    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px}
-    @media (max-width:880px){.grid{grid-template-columns:1fr}h1{font-size:22px}}
-    h2{margin:0 0 10px;font-size:18px}
-    p{margin:0 0 12px}
-    ol{margin:0 0 12px 20px}
-    .muted{color:var(--muted);font-size:14px}
-    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600}
-    .example{background:#fcfdfc;border-left:4px solid rgba(11,107,79,0.12);padding:12px;border-radius:8px}
-    label{display:block;font-weight:600;margin:8px 0 6px}
-    textarea,input{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e6e6;font-size:15px}
-    footer{padding:20px 16px;text-align:center;color:var(--muted);font-size:14px}
-    .small{font-size:13px;color:var(--muted)}
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef7f2;color:var(--accent);font-weight:600;margin-right:8px}
-    .warn{background:#fff6f0;border-left:4px solid #ffb4a2;padding:12px;border-radius:8px}
-    .actions{display:flex;gap:8px;flex-wrap:wrap}
-    .download{font-size:14px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elfogadásra Hangolódás</title>
+    <style>
+        .acceptance-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 800px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .acceptance-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .acceptance-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .tension-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .human-desire, .divine-providence {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.5rem;
+            margin: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .pathway {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+        }
+        
+        .quote-box {
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-left: 4px solid rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .tension-container {
+                flex-direction: column;
+            }
+            
+            .human-desire, .divine-providence {
+                min-width: 100%;
+            }
+        }
+        .creative-acceptance-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 3rem 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.acceptance-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.personal-testimony {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.testimony-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.quote-icon {
+    font-size: 3rem;
+    margin-right: 1rem;
+    opacity: 0.7;
+}
+
+.testimony-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.testimony-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-style: italic;
+    margin: 0;
+}
+
+.wisdom-path {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.path-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+}
+
+.step-number {
+    background: #667eea;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+
+.step-content p {
+    margin: 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+.creative-acceptance-definition {
+    background: #e8f4f8;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2.5rem;
+    border: 1px solid #b8e0ea;
+}
+
+.creative-acceptance-definition h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.definition-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.definition-text strong {
+    color: #667eea;
+}
+
+.practice-guidance h3 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.guidance-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.guidance-point {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.point-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.guidance-point p {
+    margin: 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .acceptance-container {
+        padding: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .path-step {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .guidance-point {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
+.divine-will-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 3rem 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.will-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+}
+
+.section-title {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+}
+
+.subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    font-style: italic;
+}
+
+.scripture-foundation {
+    margin-bottom: 3rem;
+}
+
+.bible-verse {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.verse-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.verse-text {
+    font-size: 1.4rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.verse-reference {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.personal-revelation {
+    margin-bottom: 3rem;
+}
+
+.revelation-content {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    border-left: 5px solid #667eea;
+}
+
+.revelation-content h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.revelation-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+}
+
+.divine-will-path {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.path-step {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+    transition: transform 0.3s ease;
+}
+
+.path-step:hover {
+    transform: translateY(-5px);
+}
+
+.step-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.path-step h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.path-step p {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.step-prayer {
+    font-style: italic;
+    color: #667eea !important;
+    font-weight: 500;
+    background: #f8f9ff;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-top: 1rem !important;
+}
+
+.creative-surrender {
+    margin-bottom: 3rem;
+}
+
+.creative-surrender h3 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.surrender-definition {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    padding: 2.5rem;
+    border-radius: 15px;
+}
+
+.surrender-definition p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.surrender-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.surrender-points li {
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.surrender-points li:last-child {
+    border-bottom: none;
+}
+
+.surrender-points strong {
+    color: #2c3e50;
+}
+
+.practical-guidance {
+    margin-bottom: 3rem;
+}
+
+.practical-guidance h3 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.prayer-guide {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.prayer-step {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.prayer-number {
+    background: #667eea;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.prayer-text h5 {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.prayer-text p {
+    margin: 0;
+    color: #666;
+    font-style: italic;
+}
+
+.closing-promise {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    padding: 2.5rem;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.promise-content h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.promise-text {
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.promise-reference {
+    color: #7f8c8d;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .will-container {
+        padding: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .divine-will-path {
+        grid-template-columns: 1fr;
+    }
+    
+    .prayer-step {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .bible-verse {
+        padding: 1.5rem;
+    }
+    
+    .verse-text {
+        font-size: 1.2rem;
+    }
+}
+
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>Elfogadásra Hangolódás</h1>
-      <div class="tagline">Nem lemondás — átadás. A vágyakat Istenre bízni úgy, hogy közben cselekszünk, de nem erőlködünk.</div>
+    <section class="acceptance-section">
+        <h1 class="acceptance-title">Elfogadásra Hangolódás</h1>
+        
+        <div class="acceptance-content">
+            <p>Az elmének csak annyit szeretnék közvetíteni, hogy hangolódjon az elfogadásra, mert a vágyak ugyanúgy az ismeretlen határait feszegetik, mint az Isteni gondviselés.</p>
+            <p>De az Isteni gondviselésnek van valóságismerete, ellentétben az emberi fantáziával.</p>
+        </div>
+        
+        <div class="tension-container">
+            <div class="human-desire">
+                <h3>Emberi Vágy</h3>
+                <p>Az ismeretlen határait feszegeti <strong>fantáziából</strong></p>
+                <ul>
+                    <li>Saját képzelet fogságában</li>
+                    <li>Látszólagos megoldások</li>
+                    <li>Rövid távú megnyugvás</li>
+                </ul>
+            </div>
+            
+            <div class="divine-providence">
+                <h3>Isteni Gondviselés</h3>
+                <p>Az ismeretlen határait feszegeti <strong>valóságtudatból</strong></p>
+                <ul>
+                    <li>Teljes valóság ismeretében</li>
+                    <li>Valódi megoldások</li>
+                    <li>Tartós békesség</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="pathway">
+            <h3>Az Elfogadás Aktív Folyamata</h3>
+            <p>Emberi vágy → Fantázia → Fájdalom</p>
+            <p style="font-size: 1.5rem; margin: 1rem 0;">↓</p>
+            <p style="font-weight: bold; font-size: 1.2rem;">ELFOGADÁS (hangolódás)</p>
+            <p style="font-size: 1.5rem; margin: 1rem 0;">↓</p>
+            <p>Isteni akarat → Valóságtudat → Békesség</p>
+        </div>
+        
+        <div class="quote-box">
+            "Ne a vágyaid fantáziáit kövesd, hanem hangolódj az Isteni valóságtudat rezgésére. Az egyik tévelygés a sötétben, a másik világos látás a fényben."
+        </div>
+        
+      
+        <div class="creative-acceptance-section">
+    <div class="acceptance-container">
+        <h2 class="section-title">A kreatív elfogadás útja</h2>
+        
+        <div class="personal-testimony">
+            <div class="testimony-header">
+                <span class="quote-icon">❝</span>
+                <h3>Saját tapasztalat</h3>
+            </div>
+            <p class="testimony-text">
+                "A vágyaim megvalósulhatnak anélkül is, hogy én tudnék tenni érte, ha azonosulok a vággyal
+                és a legtöbbször az így megvalósult vágy következményei nem előnyösek rám nézve - 
+                mert a tudatom, amikor vágyott, nem ismerte a következményeket."
+            </p>
+        </div>
+
+        <div class="wisdom-path">
+            <div class="path-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Vágyak felismerése</h4>
+                    <p>Megengedem, hogy feljöjjenek a vágyak anélkül, hogy azonosulnék velük</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Őszinte elfogadás</h4>
+                    <p>Elfogadom a vágyat anélkül, hogy erőltetném a megvalósítását</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Magasabb tudatra bízás</h4>
+                    <p>Átadom a teremtő folyamatot a magasabb szintű tudatosságnak</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Pozitív következmények</h4>
+                    <p>A megvalósulás a legjobb következményekkel jár számomra</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="creative-acceptance-definition">
+            <h3>Mi is az elfogadásra való hangoltság?</h3>
+            <p class="definition-text">
+                Egy <strong>őszinte kreatív hozzáállás</strong>, amely a vágyakat elfogadja, 
+                de a megvalósulást a <strong>magasabb szintű teremtő tudatra bízza</strong> 
+                a <strong>pozitív következmények</strong> érdekében.
+            </p>
+        </div>
+
+        <div class="practice-guidance">
+            <h3>Gyakorlati útmutató</h3>
+            <div class="guidance-points">
+                <div class="guidance-point">
+                    <span class="point-icon">🌊</span>
+                    <p>Engedd, hogy a vágyak áramoljanak át rajtad anélkül, hogy megragadnád őket</p>
+                </div>
+                <div class="guidance-point">
+                    <span class="point-icon">🤲</span>
+                    <p>Tarts nyitott kezeket - fogadd el, ami jön, de ne ragadd meg</p>
+                </div>
+                <div class="guidance-point">
+                    <span class="point-icon">🌄</span>
+                    <p>Bízd a megvalósulást a teljes valóságtudat bölcsességére</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </header>  <main class="container" role="main">
-    <section class="card" aria-labelledby="about-title">
-      <h2 id="about-title">Miről szól ez?</h2>
-      <p>Az elme és a fantázia gyakran kreál élénk, csábító képeket. Ha azonosulunk ezekkel a képekkel, a vágyaink torzulhatnak és karikatúraszerű formát öltenek. A gyógyulás útja nem a teljes lemondás, hanem a tudatos átadás:</p>
-      <p class="muted">Megteszem, amit tudok — tervezek, dolgozom, imádkozom — de nem görcsölök. A megvalósulást a Forrásra (Istenre) bízom: legyen meg a Te akaratod.</p>
-    </section><div class="grid">
-  <div>
-    <section class="card" aria-labelledby="practice-title">
-      <h2 id="practice-title">4 lépéses gyakorlati imaút</h2>
-      <ol>
-        <li><strong>Felismerés:</strong> Nézd meg a vágyat — mit kérsz, honnan jön, hogyan érzik magukat testben és elmében?</li>
-        <li><strong>Átadás:</strong> Hozd oda Isten elé a vágyat: ne ragaszkodj, add át a Forrásnak a megvalósulást.</li>
-        <li><strong>Bizalom:</strong> Hagyd, hogy Isten bölcsessége alakítsa a kivezető utat — cselekedj, de ne erőlködj.</li>
-        <li><strong>Hála:</strong> Köszönd meg, akár részben, akár teljesen, mert a hála formálja a szívet és megtisztítja a szándékot.</li>
-      </ol>
+</div>
+<div class="divine-will-section">
+    <div class="will-container">
+        <h2 class="section-title">Legyen meg a Te akaratod</h2>
+        <p class="subtitle">A kreatív elfogadás útja Isten akaratával</p>
+        
+        <div class="scripture-foundation">
+            <div class="bible-verse">
+                <span class="verse-icon">📖</span>
+                <p class="verse-text">"Legyen meg a Te akaratod, amint mennyben, úgy földön is."</p>
+                <p class="verse-reference">Máté 6:10</p>
+            </div>
+        </div>
+        <div class="divine-will-path">
+            <div class="path-step">
+                <div class="step-icon">💭</div>
+                <div class="step-content">
+                    <h4>Vágy felismerése</h4>
+                    <p>Megengedem, hogy feljöjjön a vágy, anélkül hogy azonosulnék vele</p>
+                    <p class="step-prayer">"Istenem, látom ezt a vágyat a szívemben"</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-icon">🤲</div>
+                <div class="step-content">
+                    <h4>Átadás neked</h4>
+                    <p>Átadom ezt a vágyat a Te bölcsességednek</p>
+                    <p class="step-prayer">"Átadom Neked, legyen meg a Te akaratod"</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-icon">🌅</div>
+                <div class="step-content">
+                    <h4>Teremtő bizalom</h4>
+                    <p>Bízom abban, hogy a Te módodon jobb, mint az enyém</p>
+                    <p class="step-prayer">"Bízom Teljes szívvel a Te teremtő utadban"</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-icon">✨</div>
+                <div class="step-content">
+                    <h4>Istenség megnyilvánulása</h4>
+                    <p>Megnyílik a lehetőség a legjobb megvalósulásra</p>
+                    <p class="step-prayer">"Legyen meg, amint mennyben, úgy földön is"</p>
+                </div>
+            </div>
+        </div>
 
-      <div class="example">
-        <strong>Példa:</strong>
-        <p class="small">Vágy: stabil munkahely és béke a családban. Felismerés: miért fontos? (biztonság, méltóság). Átadás: „Uram, ezt szeretném — a Te kezedbe teszem.” Bizalom: lépek munkakeresésben, de nem leszek kétségbeesett. Hála: köszönöm a kis lépéseket is.”</p>
-      </div>
-    </section>
+        <div class="creative-surrender">
+            <h3>A kreatív átadás</h3>
+            <div class="surrender-definition">
+                <p>
+                    Az <strong>elfogadásra való hangoltság</strong> nem passzív feladás, 
+                    hanem <strong>aktív együttműködés</strong> Isten akaratával. 
+                    Egy <strong>őszinte kreatív hozzáállás</strong>, amely:
+                </p>
+                <ul class="surrender-points">
+                    <li>📍 <strong>Elfogadja</strong> a vágyakat mint teremtő energiákat</li>
+                    <li>📍 <strong>Átadja</strong> a megvalósítást Isten teljes valóságtudatának</li>
+                    <li>📍 <strong>Bízik</strong> abban, hogy Ígérete szerint mindent jóra fordít</li>
+                    <li>📍 <strong>Várja</strong> a legjobb következményeket hitben</li>
+                </ul>
+            </div>
+        </div>
 
-    <section class="card" aria-labelledby="practice-2">
-      <h2 id="practice-2">Gyakorlati eszközök</h2>
-      <p>Használj rövid naplóbejegyzéseket: írj 1-3 mondatot minden felismerésről és az átadásról. Az ismétlés segít a belső minták átalakulásában.</p>
+        <div class="practical-guidance">
+            <h3>Gyakorlati ima-útmutató</h3>
+            <div class="prayer-guide">
+                <div class="prayer-step">
+                    <div class="prayer-number">1</div>
+                    <div class="prayer-text">
+                        <h5>Vágy felismerése</h5>
+                        <p>"Atyám, felismerem, hogy ezt szeretném..."</p>
+                    </div>
+                </div>
+                <div class="prayer-step">
+                    <div class="prayer-number">2</div>
+                    <div class="prayer-text">
+                        <h5>Átadás</h5>
+                        <p>"...de átadom Neked, legyen meg a Te akaratod"</p>
+                    </div>
+                </div>
+                <div class="prayer-step">
+                    <div class="prayer-number">3</div>
+                    <div class="prayer-text">
+                        <h5>Bizalom</h5>
+                        <p>"Bízom benned, hogy jobban tudod, mi a jó számomra, nem ragaszkodom a saját elképzeléseimhez."</p>
+                    </div>
+                </div>
+                <div class="prayer-step">
+                    <div class="prayer-number">4</div>
+                    <div class="prayer-text">
+                        <h5>Háláadás</h5>
+                        <p>"Köszönöm, hogy vezetsz a legjobb úton"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <label for="journal">Gyors napló (3-4 sor):</label>
-      <textarea id="journal" rows="4" placeholder="Ma mit adok át Istennek?"></textarea>
-      <div style="margin-top:10px" class="actions">
-        <button class="btn" onclick="saveEntry()">Mentés a böngészőben</button>
-        <a class="btn" id="clear" href="#" onclick="clearJournal();return false;">Törlés</a>
-      </div>
-      <p id="saved" class="small" style="margin-top:8px;display:none;color:var(--muted)"></p>
-    </section>
-
-    <section class="card" aria-labelledby="caution-title">
-      <h2 id="caution-title">Figyelmeztetés és iránymutatás</h2>
-      <div class="warn">
-        <p class="small">Az elme képei néha tévesek vagy túlzóak lehetnek. Ha gyakran küzdesz erős, zavaró képekkel, vagy a vágyak szorongást, depressziót vagy kényszert okoznak, kérj szakmai segítséget is — a hit és a pszichológiai támogatás kiegészítik egymást.</p>
-      </div>
-    </section>
-  </div>
-
-  <aside>
-    <div class="card">
-      <div class="pill">Lépésről-lépésre</div>
-      <h2 style="margin-top:8px">Imalap — rövid</h2>
-      <p class="small">"Uram, látom ezt a vágyat. Nem mondok le róla, de átadom neked. Cselekedjek, és bízom, hogy Te vezeted az utat. Köszönöm. Ámen."</p>
-
-      <div style="margin-top:12px;" class="actions">
-        <a class="btn download" id="downloadTxt">Letöltés (imalap)</a>
-        <a class="btn" href="#practice-title">Gyakorlatok</a>
-      </div>
-
-      <hr style="margin:14px 0;border:none;border-top:1px solid #f0f0f0">
-
-      <h2 style="font-size:16px;margin-bottom:6px">Tanúságtétel</h2>
-      <p class="small">Ha szeretnéd, megoszthatod rövid tapasztalatodat. A megosztás segít másoknak látni, hogyan működik az átadás a gyakorlatban.</p>
-      <label for="testimony">Rövid tapasztalat (opcionális):</label>
-      <textarea id="testimony" rows="4" placeholder="Egy-két sor a tapasztalatodról..."></textarea>
-      <div style="margin-top:8px" class="actions">
-        <button class="btn" onclick="saveTestimony()">Mentés</button>
-      </div>
-      <p id="testimonySaved" class="small" style="display:none;color:var(--muted);margin-top:8px"></p>
+        <div class="closing-promise">
+            <div class="promise-content">
+                <h4>Ígéret a bizalomra</h4>
+                <p class="promise-text">
+                    "Bízz az ÚRban teljes szívedből, és ne támaszkodj elméd felismerésére! 
+                    Minden utadon ismerd őt, és ő kiegyenlíti ösvényeidet."
+                </p>
+                <p class="promise-reference">Példabeszédek 3:5-6</p>
+            </div>
+        </div>
     </div>
-
-    <div class="card small" style="margin-top:12px">
-      <strong>Teológiai beágyazás</strong>
-      <p class="small">Ez a gyakorlat a keresztény hagyomány bizalmára épít: nem elutasítás, hanem ráhagyatkozás a Forrás bölcsességére. A cél: a vágy megtisztulása és a szív formálódása.</p>
-    </div>
-  </aside>
 </div>
 
-<section class="card">
-  <h2>Gyakori kérdések</h2>
-  <p><strong>Nem lesz-e ez passzivitás?</strong> Nem — az átadás mellett cselekszünk is. A különbség a ragaszkodás és a görcsösség hiánya.</p>
-  <p><strong>Mi van, ha Isten nem teljesíti a vágyamat?</strong> A hit nem garancia a megszerzésre, hanem arra, hogy a bensőnk békéje és irányultsága Isten kezében nyugszik — ez szabadságot ad cselekedni félelem nélkül.</p>
-</section>
-
-  </main>  <footer>
-    <div class="container small">© Elfogadásra Hangolódás — Készítette: te. Módosításért jelezd és segítek finomítani.</div>
-  </footer>  <script>
-    // Simple local save for journal and testimony
-    function saveEntry(){
-      const t = document.getElementById('journal').value.trim();
-      if(!t){alert('Írj valamit a naplóhoz.');return}
-      const entries = JSON.parse(localStorage.getItem('eh-journal')||'[]');
-      entries.unshift({text:t,ts:new Date().toISOString()});
-      localStorage.setItem('eh-journal', JSON.stringify(entries));
-      document.getElementById('saved').textContent = 'Mentve a böngésző helyi tárába.';
-      document.getElementById('saved').style.display='block';
-      setTimeout(()=>{document.getElementById('saved').style.display='none'},2400);
-      document.getElementById('journal').value='';
-    }
-    function saveTestimony(){
-      const t = document.getElementById('testimony').value.trim();
-      if(!t){alert('Ha megosztod, írj valamit.');return}
-      const list = JSON.parse(localStorage.getItem('eh-testimony')||'[]');
-      list.unshift({text:t,ts:new Date().toISOString()});
-      localStorage.setItem('eh-testimony', JSON.stringify(list));
-      document.getElementById('testimonySaved').textContent='Köszönjük — mentve a helyi tárba.';
-      document.getElementById('testimonySaved').style.display='block';
-      setTimeout(()=>{document.getElementById('testimonySaved').style.display='none'},2400);
-      document.getElementById('testimony').value='';
-    }
-    function clearJournal(){ if(confirm('Biztos törlöd a helyi naplót?')){localStorage.removeItem('eh-journal');alert('Törölve.')} }
-
-    // Download imalap as a .txt file
-    document.getElementById('downloadTxt').addEventListener('click', function(e){
-      const text = 'Uram, látom ezt a vágyat. Nem mondok le róla, de átadom neked. Cselekedjek, és bízom, hogy Te vezeted az utat. Köszönöm. Ámen.';
-      const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href=url; a.download='imalap.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    });
-  </script>  <section id="saved-entries" style="max-width: 800px; margin: 40px auto; padding: 20px; background: #fdfdfd; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-    <h2>Korábbi naplójegyzeteid</h2>
-    <div id="entries-list" style="margin-top: 20px; line-height: 1.6; color: #444;"></div>
-  </section>  <script>
-    function loadEntries() {
-      const listDiv = document.getElementById('entries-list');
-      listDiv.innerHTML = "";
-
-      const entries = JSON.parse(localStorage.getItem('eh-journal') || "[]");
-
-      if (entries.length === 0) {
-        listDiv.innerHTML = '<p style="color:#888">Még nincs elmentett bejegyzés.</p>';
-        return;
-      }
-
-      entries.forEach((item, index) => {
-        const entryEl = document.createElement('div');
-        entryEl.style.marginBottom = '20px';
-        entryEl.style.padding = '15px';
-        entryEl.style.border = '1px solid #ddd';
-        entryEl.style.borderRadius = '8px';
-        entryEl.style.background = '#fff';
-
-        entryEl.innerHTML = `
-          <strong>${item.date}</strong>
-          <p style="white-space: pre-wrap;">${item.text}</p>
-        `;
-
-        listDiv.appendChild(entryEl);
-      });
-    }
-
-    loadEntries();
-  </script></body>
+    </section>
+</body>
 </html>
