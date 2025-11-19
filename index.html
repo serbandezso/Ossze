@@ -3,504 +3,781 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Átkelés a Szakadék Fölött - Belső Utazás</title>
+    <title>Elfogadásra Hangolódás</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
-            color: #e8e8e8;
-            min-height: 100vh;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 4rem;
-            opacity: 0;
-            animation: fadeIn 2s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        .title {
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            font-weight: 300;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .bridge-container {
-            position: relative;
-            height: 200px;
-            margin: 4rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .bridge {
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                #ffd700 20%, 
-                #ffed4e 50%, 
-                #ffd700 80%, 
-                transparent 100%);
-            position: relative;
-            transform: scaleX(0);
-            opacity: 0;
-            transition: all 1.5s ease-out;
-            z-index: 2;
-        }
-
-        .bridge::before {
-            content: '';
-            position: absolute;
-            top: -8px;
-            left: 0;
-            right: 0;
-            height: 18px;
-            background: radial-gradient(circle at center, 
-                rgba(255, 215, 0, 0.3) 0%, 
-                transparent 70%);
-        }
-
-        /* Nap stílusok */
-        .sun {
-            position: absolute;
-            top: 30px;
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle, #ffed4e 0%, #ffd700 70%);
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
-            z-index: 1;
-            opacity: 0;
-            animation: sunRise 2s ease-out 1.5s forwards, sunGlow 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes sunRise {
-            to { 
-                opacity: 1;
-                top: 20px;
-            }
-        }
-
-        @keyframes sunGlow {
-            from { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
-            to { box-shadow: 0 0 50px rgba(255, 215, 0, 0.9), 0 0 80px rgba(255, 215, 0, 0.4); }
-        }
-
-        /* Víz stílusok */
-        .water {
-            position: absolute;
-            bottom: 30px;
-            width: 90%;
-            height: 40px;
-            background: linear-gradient(to bottom, #1a5fb4, #1c71d8);
-            border-radius: 50% 50% 0 0;
-            z-index: 1;
-            opacity: 0;
-            animation: waterRise 2s ease-out 1.5s forwards;
-            overflow: hidden;
-        }
-
-        @keyframes waterRise {
-            to { 
-                opacity: 0.8;
-                bottom: 20px;
-            }
-        }
-
-        .water::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.3));
-            border-radius: 50%;
-        }
-
-        .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            height: 20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,40 Q300,20 600,40 T1200,40 L1200,0 L0,0 Z" fill="rgba(255,255,255,0.2)"/></svg>');
-            animation: waveMove 10s linear infinite;
-        }
-
-        .wave:nth-child(2) {
-            animation-delay: -5s;
-            opacity: 0.5;
-            height: 15px;
-        }
-
-        @keyframes waveMove {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .philosophy-text {
-            text-align: center;
+        .acceptance-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin: 2rem auto;
             max-width: 800px;
-            margin: 3rem auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            opacity: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
-
-        .philosophy-text p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .portals {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .portal {
-            background: rgba(255, 255, 0, 0.08);
-            border-radius: 15px;
-            padding: 2.5rem;
+        
+        .acceptance-title {
             text-align: center;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .portal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 215, 0, 0.1), 
-                transparent);
-            transition: left 0.6s ease;
-        }
-
-        .portal:hover::before {
-            left: 100%;
-        }
-
-        .portal:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 215, 0, 0.4);
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .portal-title {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #ffd700;
-        }
-
-        .portal-description {
-            opacity: 0.8;
+            font-size: 2.2rem;
             margin-bottom: 1.5rem;
+            font-weight: 300;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
-
-        .portal-tag {
-            display: inline-block;
-            padding: 0.3rem 1rem;
-            background: rgba(255, 215, 0, 0.2);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: #ffd700;
+        
+        .acceptance-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-align: center;
+            margin-bottom: 2rem;
         }
-
-        .mind-vs-silence {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 4rem 0;
-            opacity: 0;
+        
+        .tension-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            flex-wrap: wrap;
         }
-
-        .column {
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
+        
+        .human-desire, .divine-providence {
+            flex: 1;
+            min-width: 300px;
+            padding: 1.5rem;
+            margin: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .pathway {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.15);
             border-radius: 10px;
         }
-
-        .column-title {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: #ffd700;
-        }
-
-        .column-motto {
+        
+        .quote-box {
             font-style: italic;
+            font-size: 1.3rem;
             text-align: center;
-            margin-bottom: 1.5rem;
-            opacity: 0.7;
-            font-size: 0.95rem;
-            padding: 0 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-left: 4px solid rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.1);
         }
-
-        .column.mind {
-            border-left: 3px solid #ff6b6b;
-        }
-
-        .column.silence {
-            border-left: 3px solid #4ecdc4;
-        }
-
-        .column ul {
-            list-style: none;
-        }
-
-        .column li {
-            margin-bottom: 0.8rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .column li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: inherit;
-        }
-
-        .mind li::before {
-            color: #ff6b6b;
-        }
-
-        .silence li::before {
-            color: #4ecdc4;
-        }
-
-        .quote {
-            text-align: center;
-            font-style: italic;
-            margin: 3rem 0;
-            padding: 2rem;
-            border-left: 3px solid #ffd700;
-            background: rgba(255, 215, 0, 0.05);
-            opacity: 0;
-        }
-
-        .final-invitation {
-            text-align: center;
-            margin-top: 4rem;
-            opacity: 0;
-        }
-
-        .final-invitation p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 1rem;
-        }
-
-        .invitation-link {
-            color: #ffd700;
-            text-decoration: none;
-            border-bottom: 1px solid #ffd700;
-            padding-bottom: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .invitation-link:hover {
-            opacity: 0.8;
-            border-bottom-color: transparent;
-        }
-
+        
         @media (max-width: 768px) {
-            .title {
-                font-size: 2rem;
+            .tension-container {
+                flex-direction: column;
             }
             
-            .mind-vs-silence {
-                grid-template-columns: 1fr;
-            }
-            
-            .portals {
-                grid-template-columns: 1fr;
-            }
-            
-            .container {
-                padding: 1rem;
-            }
-            
-            .sun {
-                width: 40px;
-                height: 40px;
+            .human-desire, .divine-providence {
+                min-width: 100%;
             }
         }
+        .creative-acceptance-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 3rem 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.acceptance-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.personal-testimony {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.testimony-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.quote-icon {
+    font-size: 3rem;
+    margin-right: 1rem;
+    opacity: 0.7;
+}
+
+.testimony-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.testimony-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-style: italic;
+    margin: 0;
+}
+
+.wisdom-path {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.path-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+}
+
+.step-number {
+    background: #667eea;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+
+.step-content p {
+    margin: 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+.creative-acceptance-definition {
+    background: #e8f4f8;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2.5rem;
+    border: 1px solid #b8e0ea;
+}
+
+.creative-acceptance-definition h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.definition-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.definition-text strong {
+    color: #667eea;
+}
+
+.practice-guidance h3 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.guidance-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.guidance-point {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.point-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.guidance-point p {
+    margin: 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .acceptance-container {
+        padding: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .path-step {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .guidance-point {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
+.divine-will-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 3rem 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.will-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+}
+
+.section-title {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+}
+
+.subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    font-style: italic;
+}
+
+.scripture-foundation {
+    margin-bottom: 3rem;
+}
+
+.bible-verse {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.verse-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.verse-text {
+    font-size: 1.4rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.verse-reference {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.personal-revelation {
+    margin-bottom: 3rem;
+}
+
+.revelation-content {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    border-left: 5px solid #667eea;
+}
+
+.revelation-content h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.revelation-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+}
+
+.divine-will-path {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.path-step {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+    transition: transform 0.3s ease;
+}
+
+.path-step:hover {
+    transform: translateY(-5px);
+}
+
+.step-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.path-step h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.path-step p {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.step-prayer {
+    font-style: italic;
+    color: #667eea !important;
+    font-weight: 500;
+    background: #f8f9ff;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-top: 1rem !important;
+}
+
+.creative-surrender {
+    margin-bottom: 3rem;
+}
+
+.creative-surrender h3 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.surrender-definition {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    padding: 2.5rem;
+    border-radius: 15px;
+}
+
+.surrender-definition p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.surrender-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.surrender-points li {
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.surrender-points li:last-child {
+    border-bottom: none;
+}
+
+.surrender-points strong {
+    color: #2c3e50;
+}
+
+.practical-guidance {
+    margin-bottom: 3rem;
+}
+
+.practical-guidance h3 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.prayer-guide {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.prayer-step {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.prayer-number {
+    background: #667eea;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.prayer-text h5 {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.prayer-text p {
+    margin: 0;
+    color: #666;
+    font-style: italic;
+}
+
+.closing-promise {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    padding: 2.5rem;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.promise-content h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.promise-text {
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.promise-reference {
+    color: #7f8c8d;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .will-container {
+        padding: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .divine-will-path {
+        grid-template-columns: 1fr;
+    }
+    
+    .prayer-step {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .bible-verse {
+        padding: 1.5rem;
+    }
+    
+    .verse-text {
+        font-size: 1.2rem;
+    }
+}
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1 class="title">Átkelés a Szakadék Fölött</h1>
-            <p class="subtitle">A félelemből a bizalom útján. A hiányból az egésszé.</p>
-        </header>
-
-        <div class="bridge-container">
-            <div class="sun"></div>
-            <div class="bridge"></div>
-            <div class="water">
-                <div class="wave"></div>
-                <div class="wave"></div>
-            </div>
+    <section class="acceptance-section">
+        <h1 class="acceptance-title">Elfogadásra Hangolódás</h1>
+        
+        <div class="acceptance-content">
+            <p>Az elmének csak annyit szeretnék közvetíteni, hogy hangolódjon az elfogadásra, mert a vágyak ugyanúgy az ismeretlen határait feszegetik, mint az Isteni gondviselés.</p>
+            <p>De az Isteni gondviselésnek van valóságismerete, ellentétben az emberi fantáziával.</p>
         </div>
-
-        <div class="philosophy-text">
-            <p>„A jövőt szakadéknak láttam magam előtt. A kudarc lehetősége olyan szégyent hordozott, amit az önbecsülésem már nem bírt el. Inkább választotta volna a biztos halált, mint hogy szembenézzen a zuhanás félelmével. Nem a semmi vonzott — csak menekültem attól, amit elviselhetetlennek hittem. Aztán, amikor az elmém összeomlott, és már nem volt mit védenie, a csendben előlépett valami, amit addig nem hallottam: a szeretet, amely nem vádol, nem szégyenít, csak megtart.”</p>
-            <p>Az Isteni gondviselés nem mentett ki a krízisből, de velem hordozta annak terhét. Most azt szeretném átadni, amit megtanultam: hogy a szenvedés átalakítható, a hiányból pedig egésszé válhatunk.</p>
-        </div>
-
-        <div class="mind-vs-silence">
-            <div class="column mind">
-                <h3 class="column-title">Az Elme Védelme</h3>
-                <p class="column-motto">"Én irányítok. Én döntök. Én védekezem."</p>
+        
+        <div class="tension-container">
+            <div class="human-desire">
+                <h3>Emberi Vágy</h3>
+                <p>Az ismeretlen határait feszegeti <strong>fantáziából</strong></p>
                 <ul>
-                    <li>Vádaskodás és harag</li>
-                    <li>Félelem-alapú reakciók</li>
-                    <li>Kontroll illúziója</li>
-                    <li>Érzelmi turbulencia</li>
-                    <li>"Maradj, ahol vagy"</li>
+                    <li>Saját képzelet fogságában</li>
+                    <li>Látszólagos megoldások</li>
+                    <li>Rövid távú megnyugvás</li>
                 </ul>
             </div>
-            <div class="column silence">
-                <h3 class="column-title">A Tudatalatti Csend</h3>
-                <p class="column-motto">"Legyen meg a Te akaratod. Bízom a gondoskodásban."</p>
-                <ul>
-                    <li>Szeretet gondoskodó formája</li>
-                    <li>Bizalom-alapú cselekvés</li>
-                    <li>Hála</li>
-                    <li>Elfogadás önmagunk és mások felé</li>
-                    <li>Belső tér megnyílása</li>
-                    <li>Mély nyugalom</li>
-                    <li>"Lépj ki a szakadék fölé"</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="quote">
-            "Nem a csodát vártam - csak a következő lépés erejét. És mindig jött, láthatatlanul, csendesen."
-        </div>
-
-        <div id="portals" class="portals">
-            <a href="https://serbandezso.github.io/Elso/" class="portal">
-                <h2 class="portal-title">Személyes Utazás</h2>
-                <p class="portal-description">A kreativitás és önazonosság útja - ahogyan a hiány és a félelem anyaggá válik az átalakulás szolgálatában</p>
-                <span class="portal-tag">Belső Átalakulás</span>
-            </a>
             
-            <a href="https://serbandezso.github.io/ks/" class="portal">
-                <h2 class="portal-title">Kvantum-Szövetség</h2>
-                <p class="portal-description">A gyakorlati alkalmazás - ahogyan a kapott szeretet visszaárad mások életébe értékké formálva</p>
-                <span class="portal-tag">Külső Szolgálat</span>
-            </a>
-<a href="https://serbandezso.github.io/Ossze/elfogad1.html" class="portal">
-                <h2 class="portal-title">Elfogadás-Önátadás</h2>
-                <p class="portal-description">A gyakorlati alkalmazás - az elfogadás, az önátadás alkalmazása.</p>
-                <span class="portal-tag">Elfogadom</span>
-            </a>
+            <div class="divine-providence">
+                <h3>Isteni Gondviselés</h3>
+                <p>Az ismeretlen határait feszegeti <strong>valóságtudatból</strong></p>
+                <ul>
+                    <li>Teljes valóság ismeretében</li>
+                    <li>Valódi megoldások</li>
+                    <li>Tartós békesség</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="pathway">
+            <h3>Az Elfogadás Aktív Folyamata</h3>
+            <p>Emberi vágy → Fantázia → Fájdalom</p>
+            <p style="font-size: 1.5rem; margin: 1rem 0;">↓</p>
+            <p style="font-weight: bold; font-size: 1.2rem;">ELFOGADÁS (hangolódás)</p>
+            <p style="font-size: 1.5rem; margin: 1rem 0;">↓</p>
+            <p>Isteni akarat → Valóságtudat → Békesség</p>
+        </div>
+        
+        <div class="quote-box">
+            "Ne a vágyaid fantáziáit kövesd, hanem hangolódj az Isteni valóságtudat rezgésére. Az egyik tévelygés a sötétben, a másik világos látás a fényben."
+        </div>
+        
+      
+        <div class="creative-acceptance-section">
+    <div class="acceptance-container">
+        <h2 class="section-title">A kreatív elfogadás útja</h2>
+        
+        <div class="personal-testimony">
+            <div class="testimony-header">
+                <span class="quote-icon">❝</span>
+                <h3>Saját tapasztalat</h3>
+            </div>
+            <p class="testimony-text">
+                "A vágyaim megvalósulhatnak anélkül is, hogy én tudnék tenni érte, ha azonosulok a vággyal
+                és a legtöbbször az így megvalósult vágy következményei nem előnyösek rám nézve - 
+                mert a tudatom, amikor vágyott, nem ismerte a következményeket."
+            </p>
         </div>
 
-        <div class="quote">
-            <h2>Mit találsz itt?</h2>
-            <p>
-                Nem megmentést adok át. Nem válaszokat és nem módszert. Amit itt találsz, az egy út története – esendő, néha fájdalmas, néha félelmetes. Egy olyan úté, ahol a csoda sosem volt látványos, sosem volt hangos, és sosem volt önmagát ünneplő. A csoda inkább rejtőzött, és csak utólag vált láthatóvá.
-            </p>
-            <p>
-                A megtartó jelenlét nem az elmén keresztül érkezett. Az elme akar, vádol, követel, mérlegel. A csend – az a mély, halk csend – nem érzelmekből beszél, hanem gondoskodásból. Ahol az ember már nem a saját erejét mutatja, hanem egyszerűen így szól: <strong>„Legyen meg a Te akaratod.”</strong>
-            </p>
-            <p>
-                A krízisben elcsendesedik az akarat. És ebben a csendben valami új születhet: nem a régi elme továbbküzdése, hanem az új ember lélegzete. A két oldal – a „Személyes út” és a „Kvantum‑Szövetség” – ezt a tapasztalatot kétféleképpen meséli el. Ez az oldal csak összeköti őket, hogy aki keres, megtalálja azt, amihez most leginkább ereje, nyitottsága vagy bátorsága van.
-            </p>
-            <p>
-                Ha szükséged van valamire ebből, vidd el. Ha nem, tedd le. A szeretet nem számít, nem kér cserébe, nem tart számon: csak adja magát.
+        <div class="wisdom-path">
+            <div class="path-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Vágyak felismerése</h4>
+                    <p>Megengedem, hogy feljöjjenek a vágyak anélkül, hogy azonosulnék velük</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Őszinte elfogadás</h4>
+                    <p>Elfogadom a vágyat anélkül, hogy erőltetném a megvalósítását</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Magasabb tudatra bízás</h4>
+                    <p>Átadom a teremtő folyamatot a magasabb szintű tudatosságnak</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Pozitív következmények</h4>
+                    <p>A megvalósulás a legjobb következményekkel jár számomra</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="creative-acceptance-definition">
+            <h3>Mi is az elfogadásra való hangoltság?</h3>
+            <p class="definition-text">
+                Egy <strong>őszinte kreatív hozzáállás</strong>, amely a vágyakat elfogadja, 
+                de a megvalósulást a <strong>magasabb szintű teremtő tudatra bízza</strong> 
+                a <strong>pozitív következmények</strong> érdekében.
             </p>
         </div>
 
-        <div class="final-invitation">
-            <p>A híd előtted van. Nem kell mást tenned, csak felismerned, hogy létezik.</p>
-            <a href="#portals" class="invitation-link">Kezdd ahol most vagy</a>
+        <div class="practice-guidance">
+            <h3>Gyakorlati útmutató</h3>
+            <div class="guidance-points">
+                <div class="guidance-point">
+                    <span class="point-icon">🌊</span>
+                    <p>Engedd, hogy a vágyak áramoljanak át rajtad anélkül, hogy megragadnád őket</p>
+                </div>
+                <div class="guidance-point">
+                    <span class="point-icon">🤲</span>
+                    <p>Tarts nyitott kezeket - fogadd el, ami jön, de ne ragadd meg</p>
+                </div>
+                <div class="guidance-point">
+                    <span class="point-icon">🌄</span>
+                    <p>Bízd a megvalósulást a teljes valóságtudat bölcsességére</p>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+<div class="divine-will-section">
+    <div class="will-container">
+        <h2 class="section-title">Legyen meg a Te akaratod</h2>
+        <p class="subtitle">A kreatív elfogadás útja Isten akaratával</p>
+        
+        <div class="scripture-foundation">
+            <div class="bible-verse">
+                <span class="verse-icon">📖</span>
+                <p class="verse-text">"Legyen meg a Te akaratod, amint mennyben, úgy földön is."</p>
+                <p class="verse-reference">Máté 6:10</p>
+            </div>
+        </div>
+        <div class="divine-will-path">
+            <div class="path-step">
+                <div class="step-icon">💭</div>
+                <div class="step-content">
+                    <h4>Vágy felismerése</h4>
+                    <p>Megengedem, hogy feljöjjön a vágy, anélkül hogy azonosulnék vele</p>
+                    <p class="step-prayer">"Istenem, látom ezt a vágyat a szívemben"</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-icon">🤲</div>
+                <div class="step-content">
+                    <h4>Átadás neked</h4>
+                    <p>Átadom ezt a vágyat a Te bölcsességednek</p>
+                    <p class="step-prayer">"Átadom Neked, legyen meg a Te akaratod"</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-icon">🌅</div>
+                <div class="step-content">
+                    <h4>Teremtő bizalom</h4>
+                    <p>Bízom abban, hogy a Te módodon jobb, mint az enyém</p>
+                    <p class="step-prayer">"Bízom Teljes szívvel a Te teremtő utadban"</p>
+                </div>
+            </div>
+            
+            <div class="path-step">
+                <div class="step-icon">✨</div>
+                <div class="step-content">
+                    <h4>Istenség megnyilvánulása</h4>
+                    <p>Megnyílik a lehetőség a legjobb megvalósulásra</p>
+                    <p class="step-prayer">"Legyen meg, amint mennyben, úgy földön is"</p>
+                </div>
+            </div>
+        </div>
 
-    <script>
-        // Egyszerű scroll animáció
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        <div class="creative-surrender">
+            <h3>A kreatív átadás</h3>
+            <div class="surrender-definition">
+                <p>
+                    Az <strong>elfogadásra való hangoltság</strong> nem passzív feladás, 
+                    hanem <strong>aktív együttműködés</strong> Isten akaratával. 
+                    Egy <strong>őszinte kreatív hozzáállás</strong>, amely:
+                </p>
+                <ul class="surrender-points">
+                    <li>📍 <strong>Elfogadja</strong> a vágyakat mint teremtő energiákat</li>
+                    <li>📍 <strong>Átadja</strong> a megvalósítást Isten teljes valóságtudatának</li>
+                    <li>📍 <strong>Bízik</strong> abban, hogy Ígérete szerint mindent jóra fordít</li>
+                    <li>📍 <strong>Várja</strong> a legjobb következményeket hitben</li>
+                </ul>
+            </div>
+        </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeIn 1.5s ease-out forwards';
-                }
-            });
-        }, observerOptions);
+        <div class="practical-guidance">
+            <h3>Gyakorlati ima-útmutató</h3>
+            <div class="prayer-guide">
+                <div class="prayer-step">
+                    <div class="prayer-number">1</div>
+                    <div class="prayer-text">
+                        <h5>Vágy felismerése</h5>
+                        <p>"Atyám, felismerem, hogy ezt szeretném..."</p>
+                    </div>
+                </div>
+                <div class="prayer-step">
+                    <div class="prayer-number">2</div>
+                    <div class="prayer-text">
+                        <h5>Átadás</h5>
+                        <p>"...de átadom Neked, legyen meg a Te akaratod"</p>
+                    </div>
+                </div>
+                <div class="prayer-step">
+                    <div class="prayer-number">3</div>
+                    <div class="prayer-text">
+                        <h5>Bizalom</h5>
+                        <p>"Bízom benned, hogy jobban tudod, mi a jó számomra, nem ragaszkodom a saját elképzeléseimhez."</p>
+                    </div>
+                </div>
+                <div class="prayer-step">
+                    <div class="prayer-number">4</div>
+                    <div class="prayer-text">
+                        <h5>Háláadás</h5>
+                        <p>"Köszönöm, hogy vezetsz a legjobb úton"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        // Animálandó elemek
-        document.querySelectorAll('.philosophy-text, .mind-vs-silence, .quote, .final-invitation').forEach(el => {
-            el.style.opacity = '0';
-            observer.observe(el);
-        });
+        <div class="closing-promise">
+            <div class="promise-content">
+                <h4>Ígéret a bizalomra</h4>
+                <p class="promise-text">
+                    "Bízz az ÚRban teljes szívedből, és ne támaszkodj elméd felismerésére! 
+                    Minden utadon ismerd őt, és ő kiegyenlíti ösvényeidet."
+                </p>
+                <p class="promise-reference">Példabeszédek 3:5-6</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-        // Híd animáció
-        const bridge = document.querySelector('.bridge');
-        setTimeout(() => {
-            bridge.style.transform = 'scaleX(1)';
-            bridge.style.opacity = '1';
-        }, 1000);
-
-        // Lágy görgetés a portálokhoz
-        document.querySelector('.invitation-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('#portals').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    </script>
+    </section>
 </body>
 </html>
